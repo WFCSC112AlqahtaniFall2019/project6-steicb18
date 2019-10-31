@@ -6,13 +6,13 @@
 #include "linkedList.h"
 using namespace std;
 
-linkedList::linkedList(){
+linkedList::linkedList(){   //default constructor
     Node(0, nullptr);
 }
 
 
 
-linkedList::~linkedList() {
+linkedList::~linkedList() {     //destructor
     cout<<"Destructor called"<<endl;
     Node* current = head;
     while( current != 0 ) {
@@ -23,18 +23,21 @@ linkedList::~linkedList() {
     head = 0;
 }
 
-void linkedList::printList() {
+void linkedList::printList() {  //Prints linked list
     Node * current = head;
-    if(current == nullptr){
-        cout<<"No list"<<endl;
+    if(current == nullptr){     //Outputs if there is no linked list
+        cout<<"No list linked list"<<endl;
     }
-    while ( current != nullptr ){
-        cout << current->value << " ";
-        current = current -> next ;
+    else{
+        cout<<"Sorted Linked List:"<<endl;
+        while ( current != nullptr ){   //Outputs each value in the list
+            cout << current->value <<endl;
+            current = current -> next ;
+        }
     }
 }
 
-linkedList::linkedList(const linkedList& left){ //copy constructor
+linkedList::linkedList(const linkedList& left){     //copy constructor used for deep copy
     this->head = new Node(left.head->value, nullptr);
     Node* newCurrent = head->next;
     Node* current = left.head->next;
@@ -46,18 +49,18 @@ linkedList::linkedList(const linkedList& left){ //copy constructor
     }
 }
 
-linkedList& linkedList::operator= ( linkedList& rhs) {
+linkedList& linkedList::operator= ( linkedList& rhs) {     //copy assignment operator used for deep copy
     cout << "assignment operator called" << endl;
     linkedList temp(rhs); // copy constructor temp
     swap(head, rhs.head); //built-in swap
     return *this;
 }
 
-void linkedList::Append(int nNode){
-    if(head == nullptr){
+void linkedList::Append(int nNode){     //creates/inserts value into linked list
+    if(head == nullptr){    //creates the first node in a list if it doesnt exist
         head = new Node(nNode);
     }
-    else{
+    else{   //creates and connects new node to list
         Node* current = head;
         while(current->next != nullptr){
             current = current->next;
@@ -68,31 +71,32 @@ void linkedList::Append(int nNode){
 }
 
 
-void linkedList::insertionSort() {
+void linkedList::insertionSort() {      //sorts linked list
 
-    Node *temp = head;
-    Node *lead = head->next;
-    Node *trail = head;
+    Node *temp = head;      //Create a temporary value
+    Node *lead = head->next;    //Create lead value
+    Node *trail = head;     //Create trail value to follow lead value
 
-    if (head == nullptr ) {
-        cout<< "No List"<< endl;
+    if (head == nullptr ) {     //outputs notifies user if there is no list
+       cout<< "No List"<< endl;
+       return;
+    }
+    if(head->next == nullptr){      //Notifies user if there is only one value in list
+        cout<<"Only one value in list"<<endl;
         return;
     }
-    if(head->next = nullptr){
-        cout<<"Only one value in list"<<endl;
-    }
-    while (lead != nullptr) {
-        if (lead->value > trail->value) {
-            trail= trail->next;
+    while (lead != nullptr) {       //loops until the end of the list is reached
+        if (lead->value > trail->value) {   //moves to next values if they are in the right order
             lead = lead->next;
-        } else {
+            trail= trail->next;
+        } else {        //Removes node in wrong position from linked list
             if (lead->value < head->value) {
                 trail->next = lead->next;
                 lead->next = head;
                 head = lead;
             } else {
                 temp = head;
-                while (temp->next->value < lead->value && temp != nullptr ) {
+                while (temp->next->value < lead->value && temp != nullptr ) {   // moves through list and reinserts node into the correct position
                     temp = temp->next;
                 }
                 trail->next = lead->next;

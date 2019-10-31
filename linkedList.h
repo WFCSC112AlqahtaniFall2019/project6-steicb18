@@ -9,13 +9,13 @@ class linkedList{
 public:
     linkedList();   //default constructor
     linkedList(const linkedList& list);   //copy constructor
-    void printList();
-    ~linkedList();
-    void Append(int nNode);
-    linkedList& operator= (linkedList& rhs);
-    void insertionSort();
+    void printList();       //print function
+    ~linkedList();      //deconstructor
+    void Append(int nNode);     //add nodes to list
+    linkedList& operator= (linkedList& rhs);    //copy assignment
+    void insertionSort();   //sort linked list
 private:
-    Node* head = nullptr;
+    Node* head = nullptr;   //create head private value
 };
 
 #ifndef BINARYINSERTIONSORT_LINKEDLIST_H

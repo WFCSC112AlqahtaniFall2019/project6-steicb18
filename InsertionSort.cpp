@@ -1,7 +1,10 @@
 #include <iostream>
 #include <vector>
+#include <assert.h>
 #include "BinaryInsertionSort.h"
 #include "Node.h"
+#include "linkedList.h"
+
 using namespace std;
 
 int main() {
@@ -11,20 +14,26 @@ int main() {
     srand(seed);
 
     vector<int> v(length);
+    linkedList list;
+
 
     // generate vector of random integers
     for (int i = 0; i < v.size(); i++) {
         v[i] = rand() % 100;
+        list.Append(v[i]);
     }
-
+cout<<"test"<<endl;
     // binary insertion sort
     insertionSort(v, v.size());
+
+
+    list.printList();
 
     // check if sorted
     for (int i = 1; i < v.size(); i++) {
         assert(v[i-1] <= v[i]);
     }
-
+    list.printList();
     // print out sorted list
     for (int i = 0; i < v.size(); i++) {
         cout << v[i] << endl;

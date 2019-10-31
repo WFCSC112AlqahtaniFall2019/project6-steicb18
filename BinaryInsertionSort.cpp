@@ -1,5 +1,10 @@
 #include "BinaryInsertionSort.h"
+#include <cassert>
+#include <vector>
+#include "node.h"
 using namespace std;
+
+
 
 int binarySearch(vector<int> a, int item, int low, int high) {
     if (high <= low) {

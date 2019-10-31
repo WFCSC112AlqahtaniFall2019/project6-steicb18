@@ -9,6 +9,7 @@ public:
         value = v;
         next = n;
     }
+    friend class linkedList;
 private:
 
     int value;

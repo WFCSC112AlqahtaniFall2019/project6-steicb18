@@ -12,7 +12,6 @@ using namespace std;
 int main() {
 
 
-
     int seed, length;
     cin >> seed >> length;
     srand(seed);

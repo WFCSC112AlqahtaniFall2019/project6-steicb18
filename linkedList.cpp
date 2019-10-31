@@ -24,16 +24,13 @@ linkedList::~linkedList() {
 }
 
 void linkedList::printList() {
-    Node *current = head;
-    if (current = nullptr) {
-        cout << "Empty List" << endl;
+    Node * current = head;
+    if(current == nullptr){
+        cout<<"No list"<<endl;
     }
-    else {
-            cout<<"here";
-            cout <<"current->value"<< endl;
-            current = current->next;
-
-
+    while ( current != nullptr ){
+        cout << current->value << " ";
+        current = current -> next ;
     }
 }
 
@@ -70,54 +67,39 @@ void linkedList::Append(int nNode){
     }
 }
 
-/*void linkedList::insertionSort() {
-    Node* leadValue = head->next;
-    Node* trailValue = head;
-    if(trailValue == nullptr){
-        cout<<"No values in list."<<endl;
-        return;
-    }
-    while(leadValue != nullptr){
-        if(leadValue > trailValue){
-            trailValue = leadValue;
-            leadValue = leadValue->next;
-        }
-        else{
-            trailValue = leadValue;
-            leadValue = leadValue->next;
-
-        }
-    }
-
-}*/
 
 void linkedList::insertionSort() {
-    Node *curr = head->next;      //creating the nodes used to traverse the linked list
-    Node *prev = head;
-    Node *check = head;
-    if (head->next == nullptr || curr->next == nullptr) {   //checking to see if their are any values in the list or only 1 value in the list
-        cout << "Not enough values in the list" << endl;  //if their are not enough values print this and return
+
+    Node *temp = head;
+    Node *lead = head->next;
+    Node *trail = head;
+
+    if (head == nullptr ) {
+        cout<< "No List"<< endl;
         return;
     }
-    while (curr != nullptr) {    //do this until curr reaches nullPtr
-        if (curr->value > prev->value) {    //if the current value is greater then the prev value move curr and prev forward 1
-            curr = curr->next;  //moving curr and prev forward in the list
-            prev = prev->next;
-        } else {         //do this if the values need to be rearranged
-            if (head->value > curr->value) {      //if head's value is greater then curr's value
-                prev->next = curr->next;      //sets prev's next equal to curr's next
-                curr->next = head;     //sets curr's next equal to the head
-                head = curr;            //sets curr's value equal to head
+    if(head->next = nullptr){
+        cout<<"Only one value in list"<<endl;
+    }
+    while (lead != nullptr) {
+        if (lead->value > trail->value) {
+            trail= trail->next;
+            lead = lead->next;
+        } else {
+            if (lead->value < head->value) {
+                trail->next = lead->next;
+                lead->next = head;
+                head = lead;
             } else {
-                check = head;     //set check equal to head
-                while (check != nullptr && check->next->value < curr->value) {   //while check dosn't reach the end of the list and checks next value is less then curr's value
-                    check = check->next;   //iterate check through the list
+                temp = head;
+                while (temp->next->value < lead->value && temp != nullptr ) {
+                    temp = temp->next;
                 }
-                prev->next = curr->next;     //when it reaches a value that must be swapped set prev's next equal to curr's next
-                curr->next = check->next;     //set curr's next equal to check's next
-                check->next = curr;              //set check's next equal to curr
+                trail->next = lead->next;
+                lead->next = temp->next;
+                temp->next = lead;
             }
         }
-        curr = prev->next;     //iterates curr
+        lead = trail->next;
     }
 }

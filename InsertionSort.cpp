@@ -1,13 +1,17 @@
 #include <iostream>
 #include <vector>
-#include <assert.h>
+#include <cassert>
 #include "BinaryInsertionSort.h"
 #include "Node.h"
-#include "linkedList.h"
+#include "LinkedList.h"
+#include <ctime>
+using namespace std;
 
 using namespace std;
 
 int main() {
+
+
 
     int seed, length;
     cin >> seed >> length;
@@ -22,22 +26,19 @@ int main() {
         v[i] = rand() % 100;
         list.Append(v[i]);
     }
-cout<<"test"<<endl;
     // binary insertion sort
     insertionSort(v, v.size());
-
-
-    list.printList();
+    list.insertionSort();
 
     // check if sorted
     for (int i = 1; i < v.size(); i++) {
         assert(v[i-1] <= v[i]);
     }
-    list.printList();
     // print out sorted list
     for (int i = 0; i < v.size(); i++) {
         cout << v[i] << endl;
     }
+    list.printList();
 
     // FINISH ME
 
